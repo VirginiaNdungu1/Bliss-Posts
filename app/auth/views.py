@@ -1,27 +1,16 @@
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import REquired, EqualTo
-from wtforms import ValidationError
-from ..models import Role, User, Category, Post, Comment
+from flask import render_template, redirect, url_for
+from ..models import User
+from .forms import RegistrationForm
+from .. import db
 
 
-class RegistrationForm(FlaskForm):
-    email = StringField('Your Email Address', validators=[Required(), Email()])
-    fullname = StringField('Enter your Full Name', validators=[Required()])
-    username = StringField('Enter your username', validators=[Required()])
-    profession = StringField('Enter your Profession', validators=[Required()])
-    quote = StringField('Life Philosophy', validators=[Required()])
-    # profile_pic
-    user_pwd = PasswordField('Enter Password', validators=[Required(), EqualTo(
-        'user_pwd_confirm', message='Passwords Must Match')])
-    user_pwd_confirm = PasswordField(
-        'Confirm Password', validators=[Required()])
-    submit = SubmitField('Sign Up')
-
-    def validate_email(self, data_field):
-        if User.query.filter_by(email=data_field.data).first():
-            raise ValidationError("There is an account with that email")
-
-    def validate_user(self, data_field):
-        if User.query.filter_by(username=data_field.data).first():
-            raise ValidationError("That username is taken")
+@auth.route('/register', methods=["GET", "POST"])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(email=form.email.data, fullname=form.fullname.data, username=form.username, data, profession=form.profession.data, quote=form.quote.data, user_pwd=form.user_pwd.data)
+        user.session.add(user)
+        db.session.commit()
+        return render_template(url_for('auth.login'))
+        title = "Bliss Account"
+    return render_template('auth/register.html', registration_form=form)
