@@ -1,2 +1,4 @@
 virtual/
 *.pyc
+start.sh
+.psql_history
