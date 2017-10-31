@@ -1,0 +1,16 @@
+{%extends 'bootstrap/base.html'%}
+
+<!-- navbar block -->
+{% block styles%}
+  {{super()}}
+
+  <link rel="stylesheet" href="{{url_for('static', filename='css/navbar.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/footer.css')}}">
+
+{% endblock %}
+
+<div class="basepage">
+  {% block navbar %}
+    {% include 'navbar.html'%}
+  {% endblock %}
+</div>
