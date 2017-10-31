@@ -1,5 +1,7 @@
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from . import login_manager
+from flask_login import UserMixin
 
 
 class Role(db.Model):
@@ -19,7 +21,7 @@ class Role(db.Model):
         return f'Role {self.role}'
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     '''
     Create new users
     Pass in db.Model as Arg
@@ -43,17 +45,29 @@ class User(db.Model):
 
     @property
     def password(self):
-        raise AttributeError('You cannot read password attribute')
+        raise AttributeError('You cannot read the password attribute')
 
     @password.setter
-    def set_password(self, password):
+    def password(self, password):
         self.user_pwd = generate_password_hash(password)
 
-    def check_password(self, user_pwd):
+    def verify_password(self, password):
         return check_password_hash(self.user_pwd, password)
 
-    def __repr__(self):
-        return f'User {self.username}'
+    @login_manager.user_loader
+    def load_user(id):
+        '''
+        callback function that retrieves a user
+        when a unique identifier is passed in it
+
+        The function queries the database and gets
+        a User with that ID
+        '''
+        return User.query.get(int(id))
+
+
+def __repr__(self):
+    return f'User {self.username}'
 
 
 class Category(db.Model):
