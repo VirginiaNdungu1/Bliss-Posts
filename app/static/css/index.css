@@ -1,18 +1,80 @@
-.baseImg {
-  background-image: url("/static/photos/abstract_color_background_picture_8016-wide.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-.base_footer {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  line-height: 1.42857143;
-  background-color: black;
+                            .landingpage {
+                            background-image: url(/static/photos/logo.jpg);
+                            background-size: 100% 100%;
+                            background-repeat: no-repeat;
+                            padding-bottom: -5%;
+                            margin-left: -9%;
+                            margin-right: -9%;
+                            text-align: center;
+                            min-height: 100%;
+                            min-width: 1024px;
+                            background-position: center;
+                            position: absolute;
+                            width: 120%;
+                            height: auto;
+                            position: fixed;
+                            top: 0.5;
+                            left: 0;
+                            overflow-x: hidden;
+                          }
+                          /*.landing {
+  display: -webkit-flex;
+  display: flex;
+  position: relative;
+  width: 500px;
+  height: 200px;
+  margin: 50px auto;
+  padding: 10px;
+  background: white;
+  -moz-box-shadow: 0 0 10px black;
+  -webkit-box-shadow: 0 0 10px black;
+  box-shadow: 0 0 10px black;
   text-align: center;
-  color: white;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
+  margin-top: 10%;
+  overflow-x: hidden;
+}*/
+
+                          .landing {
+                            width: 60%;
+                            right: 0px;
+                            min-height: 560px;
+                            margin: 0px auto;
+                            width: 500px;
+                            position: relative;
+                            margin-top: 10%;
+                          }
+
+                          .newregister {
+                            position: absolute;
+                            top: 0px;
+                            width: 88%;
+                            padding: 18px 6% 60px 6%;
+                            margin: 0 0 35px 0;
+                            background: #F7F7F7;
+                            border: 1px solid #93b8bd);
+                            /*-webkit-box-shadow: 0pt 2px 5px rgba(105, 108, 109, 0.7), 0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+                  -moz-box-shadow: 0pt 2px 5px rgba(105, 108, 109, 0.7), 0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;*/
+                            box-shadow: 0pt 2px 5px #6C6D21, 0px 0px 8px 5px #FFFAFA inset;
+                            -webkit-box-shadow: 5px;
+                            -moz-border-radius: 5px;
+                            border-radius: 5px;
+                          }
+
+                          .newregister h2 {
+                            color: teal;
+                          }
+
+                          p .registerLinks {
+                            p.change_link {
+                              position: absolute;
+                              color: #093a42;
+                              left: 0px;
+                              height: 20px;
+                              width: 440px;
+                              padding: 17px 30px 20px 30px;
+                              font-size: 16px;
+                              text-align: right;
+                              border-top: 1px solid #fefefe;
+                              border-radius: 0 0 5px 5px;
+                              margin: 0;
+                            }
