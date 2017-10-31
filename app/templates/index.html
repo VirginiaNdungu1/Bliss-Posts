@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+
+<!-- styles block -->
+
+{% block styles%}
+  {{super()}}
+  <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+  {% endblock%}
+
+  {% block content%}
+    <div class="row">
+      <div class="container">
+        <div class="baseImg"></div>
+        <div class="base_footer">
+          <p>Copyright &copy; 2017. All rights reserved.</p>
+          <h5>Peach and Cream</h5>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
