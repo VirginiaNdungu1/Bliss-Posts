@@ -15,14 +15,17 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand active" href="/">
-            Bliss Posts
+            Home
           </a>
+          <a class="navbar-brand" href="/">technology</a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="/">Home</a>
-              <a href="{{ url_for('auth.register') }}">Sign Up</a>
+              <a class="navbar-brand" href="{{ url_for('auth.register') }}">Sign Up</a>
+            </li>
+            <li>
+              <a class="navbar-brand" href="/">Sign In</a>
             </li>
           </ul>
 
