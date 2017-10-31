@@ -8,12 +8,19 @@
   {% endblock%}
 
   {% block content%}
-    <div class="row">
-      <div class="container">
-        <div class="baseImg"></div>
-        <div class="base_footer">
-          <p>Copyright &copy; 2017. All rights reserved.</p>
-          <h5>Peach and Cream</h5>
+
+    <div class="landingpage">
+      <div class="landing">
+        <div class="newregister">
+          <h2>Bliss Posts</h2>
+          <hr>
+          <p class="registerLinks">
+            Don't Have an account yet?
+          </p>
+
+          <p class="registerLinks">
+            <a href="{{ url_for('auth.register') }}">Sign Up Here</a>
+          </p>
         </div>
       </div>
     </div>
