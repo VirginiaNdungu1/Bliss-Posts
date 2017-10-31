@@ -4,7 +4,7 @@ from app.models import User
 
 class UserModelTest(unittest.TestCase):
     def setUp(self):
-        self.new_user = User(user_pwd='guava')
+        self.new_user = User(password='guava')
 
     def test_pwd_write_denied(self):
         with self.assertRaises(AttributeError):
