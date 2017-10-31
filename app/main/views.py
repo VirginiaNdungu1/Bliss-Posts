@@ -7,5 +7,4 @@ from .. import db
 @main.route("/")
 def index():
     title = 'Welcome to Bliss Posts'
-
     return render_template("index.html", title=title)
