@@ -1,4 +1,5 @@
 from . import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class Role(db.Model):
@@ -39,6 +40,17 @@ class User(db.Model):
     posts = db.relationship('Post', backref='user_posts', lazy="dynamic")
     comments = db.relationship(
         'Comment', backref='user_comments', lazy="dynamic")
+
+    @property
+    def password(self):
+        raise AttributeError('You cannot read password attribute')
+
+    @password.setter
+    def set_password(self, password):
+        self.user_pwd = generate_password_hash(password)
+
+    def check_password(self, user_pwd):
+        return check_password_hash(self.user_pwd, password)
 
     def __repr__(self):
         return f'User {self.username}'
