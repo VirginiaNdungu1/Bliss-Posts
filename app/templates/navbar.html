@@ -24,14 +24,19 @@
             <li>
               <a class="navbar-brand" href="{{ url_for('auth.register') }}">Sign Up</a>
             </li>
-            <li>
-              <a class="navbar-brand" href="/">Sign In</a>
-            </li>
-          </ul>
-
+            {% if current_user.is_authenticated %}
+              <li>{{current_user.username}}</li>
+              <li>
+                <a class="navbar-brand" href="{{ url_for('auth.logout') }}">Log Out</a>
+              </li>
+              {%else%}
+              <li>
+                <a class="navbar-brand" href="{{ url_for('auth.login') }}">Sign In</a>
+              </li>
+              {%endif%}
+            </ul>
+          </div>
         </div>
-
       </div>
-    </div>
-  </body>
-</html>
+    </body>
+  </html>
