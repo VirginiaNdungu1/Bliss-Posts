@@ -12,9 +12,10 @@ class RegistrationForm(FlaskForm):
     profession = StringField('Enter your Profession', validators=[Required()])
     quote = StringField('Life Philosophy', validators=[Required()])
     # profile_pic
-    user_pwd = PasswordField('Enter Password', validators=[Required(), EqualTo(
-        'user_pwd_confirm', message='Passwords Must Match')])
-    user_pwd_confirm = PasswordField(
+    password_hash = PasswordField('Enter Password', validators=[Required(), EqualTo(
+        'password_confirm', message='Passwords Must Match')])
+
+    password_confirm = PasswordField(
         'Confirm Password', validators=[Required()])
     submit = SubmitField('Sign Up')
 

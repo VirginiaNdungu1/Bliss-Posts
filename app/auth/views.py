@@ -12,10 +12,10 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(email=form.email.data, fullname=form.fullname.data, username=form.username.data,
-                    profession=form.profession.data, quote=form.quote.data, user_pwd=form.user_pwd.data)
+                    profession=form.profession.data, quote=form.quote.data, password=form.password_hash.data)
         db.session.add(user)
         db.session.commit()
-        return render_template('auth/register.html', registration_form=form)
+        return redirect(request.args.get('next') or url_for('main.index'))
     title = "Bliss Account"
     return render_template('auth/register.html', registration_form=form)
 
