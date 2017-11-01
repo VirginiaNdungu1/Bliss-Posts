@@ -83,6 +83,15 @@ class Category(db.Model):
     category_post = db.relationship(
         'Post', backref='category', lazy='dynamic')
 
+    def save_category(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_category(self, id):
+        category = Category.query.filter_by(category_id=id).all()
+        return category
+
     def __repr__(self):
         return f'Category {self.topic}'
 
