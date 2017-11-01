@@ -35,7 +35,6 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True, index=True)
     user_pwd = db.Column(db.String(255))
-    profile_pic_path = db.Column(db.String())
     profession = db.Column(db.String(255))
     quote = db.Column(db.String(255))
     roles = db.Column(db.Integer, db.ForeignKey('roles.role_id'))
@@ -81,7 +80,6 @@ class Category(db.Model):
     __tablename__ = 'categories'
     category_id = db.Column(db.Integer, primary_key=True)
     topic = db.Column(db.String(255))
-    category_pic = db.Column(db.String(255))
     category_post = db.relationship(
         'Post', backref='category_posts', lazy='dynamic')
 
@@ -101,12 +99,25 @@ class Post(db.Model):
     post_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String())
     description = db.Column(db.String())
-    post_pic = db.Column(db.String())
     votes = db.Column(db.Integer)
     category_id = db.Column(
         db.Integer, db.ForeignKey('categories.category_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comment_id = db.Column(db.Integer, db.ForeignKey('comments.comments_id'))
+
+    def save_post(self):
+        '''
+        method that saves an instance of the Review Model
+        to session and commits it to the database
+        '''
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_post(cls, category_id, user_id):
+        posts = Post.query.filter_by(
+            category_id=id, user_id=postsuser_id).all()
+        return posts
 
     def __repr__(self):
         return f'Post {self.title}'
@@ -124,6 +135,19 @@ class Comment(db.Model):
     comments_id = db.Column(db.Integer, primary_key=True)
     comment_description = db.Column(db.String())
     users_id = db.Column = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def save_comment(self):
+        '''
+        method that saves an instance of the Review Model
+        to session and commits it to the database
+        '''
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_comment(cls, post_id, user_id):
+        comments = Post.query.filter_by(post_id=id, alluser_id=user_id).all()
+        return comments
 
     def __repr__(self):
         return f'Comment {self.comment_description}'
