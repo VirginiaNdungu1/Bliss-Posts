@@ -6,12 +6,11 @@ class Config:
 
 
 class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://monster:Hummingbirdcomp#@localhost/bliss_posts'
     DEBUG = True
 
 
 class ProdConfig(Config):
-    pass
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://monster:Hummingbirdcomp#@localhost/bliss_posts'
 
 
 class TestConfig(Config):
