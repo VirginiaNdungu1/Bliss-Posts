@@ -13,9 +13,9 @@ class userModelTest(unittest.TestCase):
     def test_set_password(self):
         '''
         test case that ascertains that when a password
-        is hashed, the user_pwd contains value
+        is hashed, the password_hash contains value
         '''
-        self.assertTrue(self.new_user.user_pwd is not None)
+        self.assertTrue(self.new_user.password_hash is not None)
 
     def test_no_access_pwd(self):
         '''

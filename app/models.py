@@ -1,7 +1,19 @@
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from . import login_manager
 from flask_login import UserMixin
+from . import login_manager
+
+
+@login_manager.user_loader
+def load_user(id):
+    '''
+    callback function that retrieves a user
+    when a unique identifier is passed in it
+
+    The function queries the database and gets
+    a User with that ID
+    '''
+    return User.query.get(int(id))
 
 
 class Role(db.Model):
@@ -15,7 +27,7 @@ class Role(db.Model):
     __tablename__ = 'roles'
     role_id = db.Column(db.Integer, primary_key=True)
     role = db.Column(db.String(255))
-    users = db.relationship('User', backref='user_roles', lazy='dynamic')
+    users = db.relationship('User', backref='role', lazy='dynamic')
 
     def __repr__(self):
         return f'Role {self.role}'
@@ -34,13 +46,13 @@ class User(UserMixin, db.Model):
     fullname = db.Column(db.String(255))
     username = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True, index=True)
-    user_pwd = db.Column(db.String(255))
+    password_hash = db.Column(db.String(255))
     profession = db.Column(db.String(255))
     quote = db.Column(db.String(255))
     roles = db.Column(db.Integer, db.ForeignKey('roles.role_id'))
-    posts = db.relationship('Post', backref='user_posts', lazy="dynamic")
+    posts = db.relationship('Post', backref='user', lazy="dynamic")
     comments = db.relationship(
-        'Comment', backref='user_comments', lazy="dynamic")
+        'Comment', backref='user', lazy="dynamic")
 
     @property
     def password(self):
@@ -48,25 +60,13 @@ class User(UserMixin, db.Model):
 
     @password.setter
     def password(self, password):
-        self.user_pwd = generate_password_hash(password)
+        self.password_hash = generate_password_hash(password)
 
     def verify_password(self, password):
-        return check_password_hash(self.user_pwd, password)
+        return check_password_hash(self.password_hash, password)
 
-    @login_manager.user_loader
-    def load_user(id):
-        '''
-        callback function that retrieves a user
-        when a unique identifier is passed in it
-
-        The function queries the database and gets
-        a User with that ID
-        '''
-        return User.query.get(int(id))
-
-
-def __repr__(self):
-    return f'User {self.username}'
+    def __repr__(self):
+        return f'User {self.username}'
 
 
 class Category(db.Model):
@@ -81,7 +81,7 @@ class Category(db.Model):
     category_id = db.Column(db.Integer, primary_key=True)
     topic = db.Column(db.String(255))
     category_post = db.relationship(
-        'Post', backref='category_posts', lazy='dynamic')
+        'Post', backref='category', lazy='dynamic')
 
     def __repr__(self):
         return f'Category {self.topic}'
