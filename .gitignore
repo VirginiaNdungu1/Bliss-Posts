@@ -1,5 +1,4 @@
 virtual/
 *.pyc
 .psql_history
-Procfile
 start.sh

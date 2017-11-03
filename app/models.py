@@ -25,7 +25,7 @@ class Role(db.Model):
     Connect this class to our db and allow communication
     '''
     __tablename__ = 'roles'
-    role_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     role = db.Column(db.String(255))
     users = db.relationship('User', backref='role', lazy='dynamic')
 
@@ -49,7 +49,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(255))
     profession = db.Column(db.String(255))
     quote = db.Column(db.String(255))
-    roles = db.Column(db.Integer, db.ForeignKey('roles.role_id'))
+    roles = db.Column(db.Integer, db.ForeignKey('roles.id'))
     posts = db.relationship('Post', backref='user', lazy="dynamic")
     comments = db.relationship(
         'Comment', backref='user', lazy="dynamic")
@@ -78,7 +78,7 @@ class Category(db.Model):
     Connect this class to our db and allow communication
     '''
     __tablename__ = 'categories'
-    category_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     topic = db.Column(db.String(255))
     category_post = db.relationship(
         'Post', backref='category', lazy='dynamic')
@@ -88,8 +88,8 @@ class Category(db.Model):
         db.session.commit()
 
     @classmethod
-    def get_category(self, id):
-        category = Category.query.filter_by(category_id=id).all()
+    def get_category(self):
+        category = Category.query.all()
         return category
 
     def __repr__(self):
@@ -105,14 +105,14 @@ class Post(db.Model):
     Connect this class to our db and allow communication
     '''
     __tablename__ = 'posts'
-    post_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String())
     description = db.Column(db.String())
     votes = db.Column(db.Integer)
     category_id = db.Column(
-        db.Integer, db.ForeignKey('categories.category_id'))
+        db.Integer, db.ForeignKey('categories.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    comment_id = db.Column(db.Integer, db.ForeignKey('comments.comments_id'))
+    comment_id = db.relationship('Comment', backref='post', lazy='dynamic')
 
     def save_post(self):
         '''
@@ -122,11 +122,11 @@ class Post(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def get_post(cls, category_id, user_id):
-        posts = Post.query.filter_by(
-            category_id=id, user_id=postsuser_id).all()
-        return posts
+    # @classmethod
+    # def get_post(cls, id):
+    #     posts = Post.query.filter_by(
+    #         category_id=id, user_id=postsuser_id).all()
+    #     return posts
 
     def __repr__(self):
         return f'Post {self.title}'
@@ -141,9 +141,10 @@ class Comment(db.Model):
     Connect this class to our db and allow communication
     '''
     __tablename__ = 'comments'
-    comments_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     comment_description = db.Column(db.String())
-    users_id = db.Column = db.Column(db.Integer, db.ForeignKey('users.id'))
+    users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    posts_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
     def save_comment(self):
         '''
@@ -153,10 +154,10 @@ class Comment(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def get_comment(cls, post_id, user_id):
-        comments = Post.query.filter_by(post_id=id, alluser_id=user_id).all()
-        return comments
+    # @classmethod
+    # def get_comment(cls, post_id, user_id):
+    #     comments = Post.query.filter_by(post_id=id, alluser_id=user_id).all()
+    #     return comments
 
     def __repr__(self):
         return f'Comment {self.comment_description}'
