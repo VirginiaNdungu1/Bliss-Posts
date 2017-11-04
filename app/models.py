@@ -88,7 +88,7 @@ class Category(db.Model):
         db.session.commit()
 
     @classmethod
-    def get_category(self):
+    def get_category(cls):
         category = Category.query.all()
         return category
 
@@ -122,11 +122,11 @@ class Post(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    # @classmethod
-    # def get_post(cls, id):
-    #     posts = Post.query.filter_by(
-    #         category_id=id, user_id=postsuser_id).all()
-    #     return posts
+    @classmethod
+    def get_post(cls, id):
+        posts = Post.query.filter_by(
+            category_id=id).all()
+        return posts
 
     def __repr__(self):
         return f'Post {self.title}'
@@ -154,10 +154,10 @@ class Comment(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    # @classmethod
-    # def get_comment(cls, post_id, user_id):
-    #     comments = Post.query.filter_by(post_id=id, alluser_id=user_id).all()
-    #     return comments
+    @classmethod
+    def get_comment(cls, id):
+        comments = Comment.query.filter_by(posts_id=id).all()
+        return comments
 
     def __repr__(self):
         return f'Comment {self.comment_description}'
