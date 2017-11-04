@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+{% block content%}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-10">
+          <h6>{{post.user.username}}</h6>
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          <p>
+            {{post.title.upper()}}
+          </p>
+          <p>
+            {{ post.description | truncate(300) }}</p>
+          <a href="/category/newcomment/{{post.id}}">Leave a comment...</a>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-10">
+          <hr>
+          {% if comments%}
+            {{macro.displayComments(comments)}}
+            {% else%}
+            <h5>
+              <em>No comments Yet... Be the first to comment</em>
+            </h5>
+            <!-- <a href="/category/newcomment/{{post.id}}">Leave a comment</a> -->
+            {% endif%}
+          </div>
+        </div>
+      </div>
+    </div>
+    {%endblock%}

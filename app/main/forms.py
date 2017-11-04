@@ -8,4 +8,9 @@ from ..models import Role, User, Category, Post, Comment
 class PostsForm(FlaskForm):
     title = StringField('Title of Post Here...', validators=[Required()])
     description = StringField('New Message...', validators=[Required()])
-    submit = SubmitField('New Post')
+    submit = SubmitField('Post')
+
+
+class CommentsForm(FlaskForm):
+    comment_description = StringField('Leave a Reply', validators=[Required()])
+    submit = SubmitField('Comment')
