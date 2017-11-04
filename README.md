@@ -8,14 +8,14 @@ Click [Bliss Posts](https://blisdposts.herokuapp.com/) to View Deployed Site
 ## Project Specifications
 
 
-      ### Features 
-        ** Sign Up
-        ** Sign In
-        ** View Post Categories
-        ** View All Posts
-        ** Submit a Post
-        ** Submit a Comment
-        ** View All Comments
+      Features 
+        Sign Up
+        Sign In
+        View Post Categories
+        View All Posts
+        Submit a Post
+        Submit a Comment
+        View All Comments
         
  
 ## Technologies Used
