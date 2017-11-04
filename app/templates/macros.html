@@ -5,3 +5,28 @@
     </li>
   {% endfor %}
 {% endmacro %}
+
+{% macro displayPosts(posts_list)%}
+  {% for post in posts_list%}
+    <h6>{{post.user.username}}</h6>
+    <i class="fa fa-pencil" aria-hidden="true"></i>
+    <p>
+      <a href="{{url_for('main.post_comments', id = post.id)}}">{{post.title.upper()}}</a>
+    </p>
+    <p>
+      {{ post.description | truncate(300) }}</p>
+    <a href="/category/newcomment/{{post.id}}">Leave a comment...</a>
+    <hr>
+
+    {% endfor%}
+    {% endmacro%}
+
+    {% macro displayComments(comments_list)%}
+      {% for comment in comments_list%}
+        <h6>{{comment.user.username}}</h6>
+        <p>
+          {{comment.comment_description | truncate(300)}}</p>
+        <hr>
+
+        {% endfor%}
+        {% endmacro%}
