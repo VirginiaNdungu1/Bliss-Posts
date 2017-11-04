@@ -1,3 +1,5 @@
+{% import 'macros.html' as macro %}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,7 +7,7 @@
     <title></title>
   </head>
   <body>
-    <div class="navbar navbar-inverse">
+    <div class="navbar navbar-inverse" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,28 +19,53 @@
           <a class="navbar-brand active" href="/">
             Home
           </a>
-          <a class="navbar-brand" href="{{url_for('main.category')}}">categories</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a class="navbar-brand" href="{{ url_for('auth.register') }}">Sign Up</a>
-            </li>
-            {% if current_user.is_authenticated %}
-
-              <li>{{current_user.username}}</li>
-
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="{{url_for('main.category')}}" class="navbar-brand dropdown" data-toggle="dropdown">
+                Categories
+                <span class="caret" id="HeaderLogo" height="25" width="15"></span>
+              </p>
+            </a>
+            <ul class="dropdown-menu" id="BrandDropdown" role="menu">
               <li>
-                <a href="{{url_for('auth.logout')}}">Sign out</a>
+                <a href="{{url_for('main.category')}}">All Categories</a>
               </li>
-            {% else %}
               <li>
-                <a href="{{url_for('auth.login')}}">Sign in</a>
+                <a href="/category/1">Food and Lifestyle</a>
               </li>
-              {%endif%}
+              <li>
+                <a href="/category/2">Technology</a>
+              </li>
             </ul>
-          </div>
-        </div>
+
+          </li>
+
+        </ul>
       </div>
-    </body>
-  </html>
+
+    </div>
+    <div class="navbar-collapse collapse">
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a class="navbar-brand" href="{{ url_for('auth.register') }}">Sign Up</a>
+        </li>
+        {% if current_user.is_authenticated %}
+
+          <li>{{current_user.username}}</li>
+
+          <li>
+            <a href="{{url_for('auth.logout')}}">Sign out</a>
+          </li>
+        {% else %}
+          <li>
+            <a href="{{url_for('auth.login')}}">Sign in</a>
+          </li>
+          {%endif%}
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
