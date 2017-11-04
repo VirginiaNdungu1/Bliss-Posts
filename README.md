@@ -30,7 +30,7 @@
 
 ## Installation
 * `git clone <repository-url>` this repository
-* `cd Gypsy`
+* `cd Bliss-Posts`
 
 Click [Bliss Posts](https://blisdposts.herokuapp.com/) to View Deployed Site
 
