@@ -1,18 +1,28 @@
-{% extends 'base.html'%}
-{% import 'bootstrap/wtf.html' as wtf%}
-
+{% extends 'base.html' %}
 {% import 'macros.html' as macro %}
-
-{% block content %}
+{% block content%}
   <div class="container">
     <div class="row">
+      <div class="col-md-10">
+        <h2 class="text-center">{{category.topic.upper() }}</h2>
+      </div>
       <div class="col-md-6">
-        <div class="col-md-6">
-          {{wtf.quick_form(posts_form)}}
+        <a href="/category/newpost/{{category.id}}">What's on Your Mind?</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10">
+        <div class="col-md-10">
+          <hr>
+          {% if posts%}
+            {{macro.displayPosts(posts)}}
+
+            {% else%}
+            <h3>This section has no posts.</h3>
+            <a href="/category/newpost/{{category.id}}">What's on Your Mind?</a>
+            {% endif%}
+          </div>
         </div>
       </div>
-
     </div>
-
-  </div>
-{% endblock %}
+    {%endblock%}
